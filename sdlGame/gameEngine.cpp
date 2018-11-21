@@ -1,6 +1,7 @@
 #include <iostream>
 #include "SDL.h"
 #include "hGameEngine.h"
+#include "hGameTimer.h"
 
 bool Game::init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen) {
 	
@@ -36,6 +37,8 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 void Game::run() {
 
+	GameTimer fpsLock;
+
 	while (isRunning) {
 
 		input();
@@ -43,6 +46,8 @@ void Game::run() {
 		update();
 
 		render();
+
+		fpsLock.gameLoopDelay();
 	}
 
 }
