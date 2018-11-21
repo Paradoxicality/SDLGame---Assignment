@@ -1,0 +1,19 @@
+﻿  gameEngine.cpp
+f:\sdlproject\sdlgame\sdlgame\sdlgame\hgameengine.h(25): error C2143: syntax error: missing ';' before '*'
+f:\sdlproject\sdlgame\sdlgame\sdlgame\hgameengine.h(25): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+f:\sdlproject\sdlgame\sdlgame\sdlgame\hgameengine.h(25): error C2238: unexpected token(s) preceding ';'
+f:\sdlproject\sdlgame\sdlgame\sdlgame\hgameengine.h(26): error C2143: syntax error: missing ';' before '*'
+f:\sdlproject\sdlgame\sdlgame\sdlgame\hgameengine.h(26): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+f:\sdlproject\sdlgame\sdlgame\sdlgame\hgameengine.h(26): error C2238: unexpected token(s) preceding ';'
+f:\sdlproject\sdlgame\sdlgame\sdlgame\gameengine.cpp(20): error C2065: 'window': undeclared identifier
+f:\sdlproject\sdlgame\sdlgame\sdlgame\gameengine.cpp(22): error C2065: 'window': undeclared identifier
+f:\sdlproject\sdlgame\sdlgame\sdlgame\gameengine.cpp(26): error C2065: 'renderer': undeclared identifier
+f:\sdlproject\sdlgame\sdlgame\sdlgame\gameengine.cpp(26): error C2065: 'window': undeclared identifier
+f:\sdlproject\sdlgame\sdlgame\sdlgame\gameengine.cpp(28): error C2065: 'renderer': undeclared identifier
+f:\sdlproject\sdlgame\sdlgame\sdlgame\gameengine.cpp(29): error C2065: 'renderer': undeclared identifier
+f:\sdlproject\sdlgame\sdlgame\sdlgame\gameengine.cpp(81): error C2065: 'renderer': undeclared identifier
+f:\sdlproject\sdlgame\sdlgame\sdlgame\gameengine.cpp(84): error C2065: 'renderer': undeclared identifier
+f:\sdlproject\sdlgame\sdlgame\sdlgame\gameengine.cpp(93): error C2065: 'window': undeclared identifier
+f:\sdlproject\sdlgame\sdlgame\sdlgame\gameengine.cpp(94): error C2065: 'renderer': undeclared identifier
+  sdlGame.cpp
+  Generating Code...
