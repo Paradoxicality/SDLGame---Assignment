@@ -1,19 +1,19 @@
 #include <iostream>
+#include <fstream>
+#include <string>
 #include "SDL.h"
 #include "hGameEngine.h"
 #include "hGameTimer.h"
+#include "hGameObject.h"
 
-bool Game::init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen) {
+bool Game::init() {
 	
 	int flags = 0; //Set to read from file 
-	if (fullscreen) { //If fullscreen option is on
-		flags = SDL_WINDOW_FULLSCREEN;
-	}
 	
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0) { //If SDL initializes / is setup right
 		std::cout << "SDL initialized" << std::endl; //Debug
 
-		window = SDL_CreateWindow(title, xpos, ypos, width, height, flags); //Set window params and create window
+		window = SDL_CreateWindow("17631941 - Brennan Ceballos Pena - Games Computing - Temporary Name ", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windowWidth, windowHeight, flags); //Set window params and create window
 
 		if (window) {
 			std::cout << "Window initialized" << std::endl; //Debug
@@ -32,7 +32,38 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	}
 
 	isRunning = true;
+
+	readFile();
+	build();
+
 	return true; //Set the game running to true
+}
+
+void Game::build() {
+	GameObject tile;
+	tile.rect.w = blockSize;
+	tile.rect.h = blockSize;
+
+	for (int h = 0; h < windowColumns; h++) {
+
+		for (int w = 0; w < windowRows; w++) {
+			switch (worldInts[(h*windowRows) + w])
+			{
+			case 1:
+				std::cout << "Player Spawned" << std::endl;
+				break;
+			case 2:
+				tile.init(w*blockSize, h*blockSize);
+				std::cout << "Tile thing" << std::endl;
+				worldTiles.push_back(tile);
+				break;
+
+			default:
+				break;
+			}
+		}
+
+	}
 }
 
 void Game::run() {
@@ -79,10 +110,13 @@ void Game::eventHandler() {
 
 void Game::render() {
 	SDL_RenderClear(renderer); //Clear the renderer's buffer
-	//Area to add stuff to render
 
+	for (GameObject object : worldTiles) {
+		object.render(renderer);
+	}
+
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
 	SDL_RenderPresent(renderer);
-
 }
 
 void Game::input() {
@@ -94,4 +128,27 @@ void Game::clean() {
 	SDL_DestroyRenderer(renderer);
 	SDL_Quit();
 	std::cout << "Game closed & cleaned" << std::endl;
+}
+
+
+void Game::readFile() {
+	std::string line;
+	
+	std::ifstream f("Assets/Maps/world.txt");
+
+	if (f.is_open())
+	{
+		std::cout << "File: opened" << std::endl;
+		while (std::getline(f, line))
+		{ 
+			for (char num : line) {
+				if (!isspace(num)) {
+					worldInts.push_back(num-'0');
+				}
+			}
+		}
+		f.close();
+	} else {
+		std::cout << "File: Unable to open" << std::endl;
+	}
 }

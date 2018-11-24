@@ -1,11 +1,15 @@
 #ifndef gameEngine
 #define gameEngine
 
+#include <vector>
+#include "hGameObject.h"
+
 class Game {
 	public:
 
-		bool init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen);
+		bool init();
 
+		void build();
 		void run();
 		void update();
 		void lateUpdate();
@@ -14,7 +18,19 @@ class Game {
 		void eventHandler();
 		void clean();
 
+		//Fix later
+		void readFile();
+
+		std::vector<int> worldInts;
+		std::vector<GameObject> worldTiles;
+
 		bool running() { return isRunning; };
+
+		const int blockSize = 20;
+		const int windowRows = 40;
+		const int windowColumns = 30;
+		const int windowHeight = 600;
+		const int windowWidth = 800;
 
 	private:
 	

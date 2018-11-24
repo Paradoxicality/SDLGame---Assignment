@@ -1,4 +1,2 @@
-﻿  gameEngine.cpp
-  sdlGame.cpp
-  Generating Code...
+﻿  gameObject.cpp
   sdlGame.vcxproj -> C:\Users\brenn\OneDrive\Documents\sdlGame\x64\Debug\sdlGame.exe
