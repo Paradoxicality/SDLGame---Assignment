@@ -47,17 +47,32 @@ void Game::build() {
 	for (int h = 0; h < windowColumns; h++) {
 
 		for (int w = 0; w < windowRows; w++) {
+			tile = GameObject();
+			tile.rect.x = w * blockSize;
+			tile.rect.y = h * blockSize;
 			switch (worldInts[(h*windowRows) + w])
 			{
+			case 0:
+				tile.init(GameObject::BlockType::EMPTY);
+				std::cout << "Empty thing" << std::endl;
+				worldTiles.push_back(tile);
+				break;
 			case 1:
+				tile.init(GameObject::BlockType::PLAYER);
 				std::cout << "Player Spawned" << std::endl;
 				break;
 			case 2:
-				tile.init(w*blockSize, h*blockSize);
+				tile.init(GameObject::BlockType::WALL);
 				std::cout << "Tile thing" << std::endl;
 				worldTiles.push_back(tile);
 				break;
-
+			case 3:
+				tile.init(GameObject::BlockType::DOOR);
+				std::cout << "Door thing" << std::endl;
+				worldTiles.push_back(tile);
+				break;
+			case 4:
+				tile.init(GameObject::BlockType::FINISH);
 			default:
 				break;
 			}

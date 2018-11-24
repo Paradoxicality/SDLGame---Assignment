@@ -9,7 +9,8 @@ void GameObject :: render(SDL_Renderer* renderer) {
 	SDL_RenderFillRect(renderer, &rect);
 }
 
-void GameObject:: init (int x, int y) {
+void GameObject:: init (BlockType type) {
+	this->type = type;
 	rect.x = x;
 	rect.y = y;
 }
