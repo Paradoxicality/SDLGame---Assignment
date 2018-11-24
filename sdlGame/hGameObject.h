@@ -5,12 +5,16 @@ class GameObject {
 
 public:
 
+	enum class BlockType { EMPTY, DOOR, WALL, FINISH, PLAYER, PICKUP, ENEMY };
+
 	SDL_Rect rect;
 
-	void init(int x, int y);
-	void render(SDL_Renderer* renderer);
+	void init(BlockType type);
 	void update();
 	void lateUpdate();
+	void render(SDL_Renderer* renderer);
+
+	BlockType type;
 
 private:
 
