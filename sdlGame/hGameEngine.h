@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "hGameObject.h"
+#include "hPlayer.h"
 
 class Game {
 	public:
@@ -31,6 +32,8 @@ class Game {
 		const int windowColumns = 30;
 		const int windowHeight = 600;
 		const int windowWidth = 800;
+
+
 
 	private:
 	

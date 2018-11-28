@@ -7,27 +7,24 @@
 #include "hGameObject.h"
 
 bool Game::init() {
-	
-	int flags = 0; //Set to read from file 
-	
+
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0) { //If SDL initializes / is setup right
 		std::cout << "SDL initialized" << std::endl; //Debug
 
-		window = SDL_CreateWindow("17631941 - Brennan Ceballos Pena - Games Computing - Temporary Name ", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windowWidth, windowHeight, flags); //Set window params and create window
+		window = SDL_CreateWindow("17631941 - Brennan Ceballos Pena - Games Computing - Temporary Name ", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windowWidth, windowHeight, SDL_WINDOW_SHOWN); //Set window params and create window
 
-		if (window) {
+		if (window != NULL) {
 			std::cout << "Window initialized" << std::endl; //Debug
 		}
 
-		renderer = SDL_CreateRenderer(window, -1, 0); //Set rendrer params and create renderer
+		renderer = SDL_CreateRenderer(window, 0, 0); //Set rendrer params and create renderer
 
-		if (renderer) {
+		if (renderer != NULL) {
 			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
 			std::cout << "Renderer initialized" << std::endl; //Debug
 		}
 	}
 	else {
-		isRunning = false;
 		return false; //If can't initialize set game running to false
 	}
 
@@ -36,43 +33,45 @@ bool Game::init() {
 	readFile();
 	build();
 
-	return true; //Set the game running to true
+	return true; //Set the game running to true */
 }
 
 void Game::build() {
-	GameObject tile;
-	tile.rect.w = blockSize;
-	tile.rect.h = blockSize;
+
 
 	for (int h = 0; h < windowColumns; h++) {
 
 		for (int w = 0; w < windowRows; w++) {
-			tile = GameObject();
+			GameObject tile = GameObject();
 			tile.rect.x = w * blockSize;
 			tile.rect.y = h * blockSize;
+			tile.rect.w = blockSize;
+			tile.rect.h = blockSize;
+
 			switch (worldInts[(h*windowRows) + w])
 			{
 			case 0:
-				tile.init(GameObject::BlockType::EMPTY);
+				tile.init(0,0,0);
 				std::cout << "Empty thing" << std::endl;
 				worldTiles.push_back(tile);
 				break;
 			case 1:
-				tile.init(GameObject::BlockType::PLAYER);
+				tile.init(255,0,0);
 				std::cout << "Player Spawned" << std::endl;
 				break;
 			case 2:
-				tile.init(GameObject::BlockType::WALL);
+				tile.init(0,0,255);
 				std::cout << "Tile thing" << std::endl;
 				worldTiles.push_back(tile);
 				break;
 			case 3:
-				tile.init(GameObject::BlockType::DOOR);
+				tile.init(0,255,0);
 				std::cout << "Door thing" << std::endl;
 				worldTiles.push_back(tile);
 				break;
 			case 4:
-				tile.init(GameObject::BlockType::FINISH);
+				tile.init(255,0,255);
+				break;
 			default:
 				break;
 			}
