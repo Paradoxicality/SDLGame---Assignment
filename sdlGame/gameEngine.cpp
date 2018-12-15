@@ -48,29 +48,31 @@ void Game::build() {
 			tile.rect.w = blockSize;
 			tile.rect.h = blockSize;
 
+
 			switch (worldInts[(h*windowRows) + w])
 			{
 			case 0:
 				tile.init(0,0,0);
-				std::cout << "Empty thing" << std::endl;
 				worldTiles.push_back(tile);
 				break;
 			case 1:
-				tile.init(255,0,0);
-				std::cout << "Player Spawned" << std::endl;
+				player.init(255,0,0);
+				player.rect.x = w * blockSize;
+				player.rect.y = h * blockSize;
+				player.rect.w = blockSize;
+				player.rect.h = blockSize;
 				break;
 			case 2:
 				tile.init(0,0,255);
-				std::cout << "Tile thing" << std::endl;
 				worldTiles.push_back(tile);
 				break;
 			case 3:
 				tile.init(0,255,0);
-				std::cout << "Door thing" << std::endl;
 				worldTiles.push_back(tile);
 				break;
 			case 4:
 				tile.init(255,0,255);
+				worldTiles.push_back(tile);
 				break;
 			default:
 				break;
@@ -83,9 +85,7 @@ void Game::build() {
 void Game::run() {
 
 	GameTimer fpsLock;
-
 	while (isRunning) {
-
 		input();
 
 		update();
@@ -98,14 +98,26 @@ void Game::run() {
 }
 
 void Game::update() {
-
+	player.update();
 }
 
 void Game::lateUpdate() {
 
 }
 
-void Game::eventHandler() {
+void Game::render() {
+	SDL_RenderClear(renderer); //Clear the renderer's buffer
+
+	for (GameObject object : worldTiles) {
+		object.render(renderer);
+	}
+	player.render(renderer);
+
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+	SDL_RenderPresent(renderer);
+}
+
+void Game::input() {
 	SDL_Event event; //Check events 
 
 	while (SDL_PollEvent(&event) != 0) { //Get type of event, event is dereferenced
@@ -116,25 +128,11 @@ void Game::eventHandler() {
 			break;
 
 		default:
+			player.input(event);
 			break;
 		}
 
 	}
-}
-
-void Game::render() {
-	SDL_RenderClear(renderer); //Clear the renderer's buffer
-
-	for (GameObject object : worldTiles) {
-		object.render(renderer);
-	}
-
-	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
-	SDL_RenderPresent(renderer);
-}
-
-void Game::input() {
-	eventHandler();
 }
 
 void Game::clean() {

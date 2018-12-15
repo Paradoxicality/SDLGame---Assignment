@@ -33,7 +33,7 @@ class Game {
 		const int windowHeight = 600;
 		const int windowWidth = 800;
 
-
+		Player player;
 
 	private:
 	

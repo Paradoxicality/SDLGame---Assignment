@@ -154,6 +154,7 @@
     <ClCompile Include="gameObject.cpp" />
     <ClCompile Include="gameEngine.cpp" />
     <ClCompile Include="gameTimer.cpp" />
+    <ClCompile Include="player.cpp" />
     <ClCompile Include="sdlGame.cpp" />
   </ItemGroup>
   <ItemGroup>
